@@ -22,6 +22,18 @@ public class ScanAlarmManager {
             cancelAlarm();
         }
 
+        // TODO: replace with the correct scheduling method depending on API level
+        // Steps:
+        //      - Get API level from Build.VERSION.SDK_INT
+        //      - Use alarmManager private member most appropriate method:
+        //          - 23 <= API --> setExactAndAllowWhileIdle(...)
+        //          - 19 <= API < 23 --> setExact(...)
+        //          - API < 19 --> set(...)
+        //          - All methods use the same parameters
+        //
+        // Android DOCS --> https://developer.android.com/reference/android/app/AlarmManager#setExactAndAllowWhileIdle(int,%20long,%20android.app.PendingIntent)
+        //                  https://developer.android.com/reference/android/app/AlarmManager#setExact(int,%20long,%20android.app.PendingIntent)
+        //                  https://developer.android.com/reference/android/app/AlarmManager#set(int,%20long,%20android.app.PendingIntent)
         this.alarmManager.set(
                 AlarmManager.RTC_WAKEUP,
                 System.currentTimeMillis() + interval,
