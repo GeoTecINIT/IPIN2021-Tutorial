@@ -22,6 +22,14 @@ public class ScanAlarmManager {
             cancelAlarm();
         }
 
+        // TODO: replace with one-shot alarm scheduling using AlarmManager#set(...) method
+        // Steps:
+        //      - Use alarmManager private member to call set(...). Parameters:
+        //          - Alarm type: we will use AlarmManager.RTC_WAKEUP
+        //          - Trigger at: alarm first execution timestamp --> now + interval
+        //          - Pending intent: who will receive the trigger. Use getPendingIntent()
+        //
+        // Android DOCS --> https://developer.android.com/reference/android/app/AlarmManager#set(int,%20long,%20android.app.PendingIntent)
         this.alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 System.currentTimeMillis() + interval,
