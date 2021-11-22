@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">IPIN 2021 Tutorial</string>
+    <string name="alert_location_request_title">Location permissions</string>
+    <string name="alert_location_request_body">This permission is required to scan nearby Bluetooth devices.</string>
+    <string name="alert_bg_location_request_title">Background location permissions</string>
+    <string name="alert_bg_location_request_body">This permission is required to scan nearby Bluetooth devices in background.</string>
+
+    <string name="alert_permissions_denied_title">Permissions denied</string>
+    <string name="alert_permissions_denied_body">App can not work without the required permissions.</string>
+    <string name="alert_bg_permissions_denied_body">App might not work as expected without the requested permission.</string>
+
+    <string name="alert_battery_title">Battery optimizations</string>
+    <string name="alert_battery_request_body">Battery optimizations must be disabled for the correct operation of the app.</string>
+    <string name="alert_battery_denied_body">By not disabling optimizations, the app might not work as expected.</string>
+
+    <string name="alert_bluetooth_request_title">Enable Bluetooth</string>
+    <string name="alert_bluetooth_request_body">The App requires Bluetooth to be enabled. We are going to request to enable it.</string>
+    <string name="alert_bluetooth_denied_title">Bluetooth disabled</string>
+    <string name="alert_bluetooth_denied_body">The App can not work with the Bluetooth disabled.</string>
+
+    <string name="alert_ok">OK</string>
+    <string name="alert_close">Close</string>
+</resources>
