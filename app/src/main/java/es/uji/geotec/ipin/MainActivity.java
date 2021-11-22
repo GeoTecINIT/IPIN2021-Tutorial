@@ -208,6 +208,14 @@ public class MainActivity extends AppCompatActivity {
                     fingerprintsTextView.setText(stringifyFingerprintList(fingerprint));
                     scrollView.postDelayed(() -> scrollView.fullScroll(View.FOCUS_DOWN), 200);
                 });
+
+        // TODO: Alarm scheduling
+        // Steps:
+        //      - Create a ScanAlarmManager instance using the context (this).
+        //      - Schedule an alarm if it is not already set:
+        //          - Check alarm up --> ScanAlarmManager#isAlarmUp()
+        //          - Schedule alarm --> ScanAlarmManager#schedule(interval)
+        //          - Interval --> ScanAlarmManager.INTERVAL (one minute).
     }
 
     private String stringifyFingerprintList(List<BLEFingerprint> fingerprints) {
