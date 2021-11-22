@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.uji.geotec.ipin.alarm.ScanAlarmManager;
 import es.uji.geotec.ipin.model.BLEFingerprint;
 import es.uji.geotec.ipin.model.BLERecord;
 import es.uji.geotec.ipin.room.FingerprintsLocalDatabase;
@@ -209,13 +210,10 @@ public class MainActivity extends AppCompatActivity {
                     scrollView.postDelayed(() -> scrollView.fullScroll(View.FOCUS_DOWN), 200);
                 });
 
-        // TODO: Alarm scheduling
-        // Steps:
-        //      - Create a ScanAlarmManager instance using the context (this).
-        //      - Schedule an alarm if it is not already set:
-        //          - Check alarm up --> ScanAlarmManager#isAlarmUp()
-        //          - Schedule alarm --> ScanAlarmManager#schedule(interval)
-        //          - Interval --> ScanAlarmManager.INTERVAL (one minute).
+        ScanAlarmManager scanAlarmManager = new ScanAlarmManager(this);
+        if (!scanAlarmManager.isAlarmUp()) {
+            scanAlarmManager.schedule(ScanAlarmManager.INTERVAL);
+        }
     }
 
     private String stringifyFingerprintList(List<BLEFingerprint> fingerprints) {
