@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 public class ScanAlarmManager {
 
@@ -22,23 +23,18 @@ public class ScanAlarmManager {
             cancelAlarm();
         }
 
-        // TODO: replace with the correct scheduling method depending on API level
-        // Steps:
-        //      - Get API level from Build.VERSION.SDK_INT
-        //      - Use alarmManager private member most appropriate method:
-        //          - 23 <= API --> setExactAndAllowWhileIdle(...)
-        //          - 19 <= API < 23 --> setExact(...)
-        //          - API < 19 --> set(...)
-        //          - All methods use the same parameters
-        //
-        // Android DOCS --> https://developer.android.com/reference/android/app/AlarmManager#setExactAndAllowWhileIdle(int,%20long,%20android.app.PendingIntent)
-        //                  https://developer.android.com/reference/android/app/AlarmManager#setExact(int,%20long,%20android.app.PendingIntent)
-        //                  https://developer.android.com/reference/android/app/AlarmManager#set(int,%20long,%20android.app.PendingIntent)
-        this.alarmManager.set(
-                AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis() + interval,
-                getPendingIntent()
-        );
+        int alarmType = AlarmManager.RTC_WAKEUP;
+        long triggerAtMillis = System.currentTimeMillis() + interval;
+        PendingIntent pendingIntent = getPendingIntent();
+
+        int sdkVersion = Build.VERSION.SDK_INT;
+        if (sdkVersion >= 23) { // Android 6 (Marshmallow) or higher
+            this.alarmManager.setExactAndAllowWhileIdle(alarmType, triggerAtMillis, pendingIntent);
+        } else if (sdkVersion >= 19) { // Android 4.4 (KitKat) - Android 5.1 (Lollipop)
+            this.alarmManager.setExact(alarmType, triggerAtMillis, pendingIntent);
+        } else { // Older versions
+            this.alarmManager.set(alarmType, triggerAtMillis, pendingIntent);
+        }
     }
 
     public void cancel() {
