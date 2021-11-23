@@ -3,8 +3,11 @@ package es.uji.geotec.ipin.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import es.uji.geotec.ipin.scan.ScanManager;
 
 public class ScanService extends Service {
 
@@ -34,14 +37,10 @@ public class ScanService extends Service {
     }
 
     private void startScan() {
-        // TODO: Start scan using ScanManager#startScanAndStoreFingerprints(scanningTime) and destroy service when scan is completed
-        // Steps:
-        //      - Create a new ScanManager instance using context (this) and a Beacon UUID filter:
-        //          - UUID filter: a9c04048-a71e-42b5-b569-13b5ac77b618
-        //      - Start a scan using ScanManager#startScanAndStoreFingerprints(scanTime):
-        //          - Scan time --> ScanManager.SCANNING_TIME (10 seconds)
-        //      - Subscribe to previous call to know when the scan ends:
-        //          - (...).subscribe(() -> Log.d("ScanAlarmReceiver", "scan ended!"))
-        //      - To stop service call to stopSelf()
+        ScanManager scanManager = new ScanManager(this, "a9c04048-a71e-42b5-b569-13b5ac77b618");
+        scanManager.startScanAndStoreFingerprints(ScanManager.SCANNING_TIME).subscribe(() -> {
+            Log.d("ScanService", "scan completed");
+            stopSelf();
+        });
     }
 }
