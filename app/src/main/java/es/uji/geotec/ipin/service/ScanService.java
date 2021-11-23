@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import es.uji.geotec.ipin.NotificationProvider;
 import es.uji.geotec.ipin.scan.ScanManager;
 
 public class ScanService extends Service {
@@ -26,13 +27,11 @@ public class ScanService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         int flag = super.onStartCommand(intent, flags, startId);
 
-        // TODO: set service in foreground mode with an explaining notification
-        // Steps:
-        //      - Create a new NotificationProvider instance:
-        //          - Provides a notification --> NotificationProvider#getForegroundNotification()
-        //      - Call startForeground(...). Parameters:
-        //          - id: notification id --> NotificationProvider.NOTIFICATION_ID_FOREGROUND
-        //          - notification: the notification from NotificationProvider
+        NotificationProvider notificationProvider = new NotificationProvider(this);
+        startForeground(
+                NotificationProvider.NOTIFICATION_ID_FOREGROUND,
+                notificationProvider.getForegroundNotification()
+        );
 
         startScan();
 
@@ -43,9 +42,7 @@ public class ScanService extends Service {
     public void onDestroy() {
         super.onDestroy();
 
-        // TODO: remove service from foreground mode and remove notification using stopForeground(...)
-        //
-        // Android DOCS: https://developer.android.com/reference/android/app/Service#stopForeground(int)
+        stopForeground(true);
     }
 
     private void startScan() {

@@ -14,8 +14,7 @@ public class ScanAlarmReceiver extends BroadcastReceiver {
         ScanAlarmManager scanAlarmManager = new ScanAlarmManager(context);
         scanAlarmManager.schedule(ScanAlarmManager.INTERVAL);
 
-        // TODO: start service as foreground using ContextCompat.startForegroundService(...)
         Intent serviceIntent = new Intent(context, ScanService.class);
-        context.startService(serviceIntent);
+        ContextCompat.startForegroundService(context, serviceIntent);
     }
 }
