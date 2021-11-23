@@ -15,7 +15,7 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-    <!-- TODO: add wake lock permission -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"

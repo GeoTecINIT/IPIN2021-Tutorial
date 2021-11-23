@@ -1,8 +1,10 @@
 package es.uji.geotec.ipin.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -11,6 +13,8 @@ import es.uji.geotec.ipin.NotificationProvider;
 import es.uji.geotec.ipin.scan.ScanManager;
 
 public class ScanService extends Service {
+
+    private PowerManager.WakeLock wakeLock;
 
     @Nullable
     @Override
@@ -22,15 +26,13 @@ public class ScanService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        // TODO: create and acquire a wake lock
-        // Steps:
-        //      - Get a PowerManager instance --> getSystemService(Context.POWER_SERVICE)
-        //      - Use the PowerManager#newWakeLock(...) to create a new class level wake lock. Parameters:
-        //          - levelAndFlags: use PowerManager.PARTIAL_WAKE_LOCK
-        //          - tag: use IPIN2021TUTORIAL::ScanServiceWakeLock
-        //      - Acquire the wake lock with a timeout (ScanManager.SCANNING_TIME + amount)
-        //
-        // Android DOCS: https://developer.android.com/reference/android/os/PowerManager#newWakeLock(int,%20java.lang.String)
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK,
+                "IPIN2021TUTORIAL::ScanServiceWakeLock"
+        );
+
+        wakeLock.acquire(ScanManager.SCANNING_TIME + 5000);
     }
 
     @Override
@@ -54,7 +56,9 @@ public class ScanService extends Service {
 
         stopForeground(true);
 
-        // TODO: release wake lock if it is being held
+        if (wakeLock.isHeld()) {
+            wakeLock.release();
+        }
     }
 
     private void startScan() {
