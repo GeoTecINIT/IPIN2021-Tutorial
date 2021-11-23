@@ -21,6 +21,16 @@ public class ScanService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // TODO: create and acquire a wake lock
+        // Steps:
+        //      - Get a PowerManager instance --> getSystemService(Context.POWER_SERVICE)
+        //      - Use the PowerManager#newWakeLock(...) to create a new class level wake lock. Parameters:
+        //          - levelAndFlags: use PowerManager.PARTIAL_WAKE_LOCK
+        //          - tag: use IPIN2021TUTORIAL::ScanServiceWakeLock
+        //      - Acquire the wake lock with a timeout (ScanManager.SCANNING_TIME + amount)
+        //
+        // Android DOCS: https://developer.android.com/reference/android/os/PowerManager#newWakeLock(int,%20java.lang.String)
     }
 
     @Override
@@ -43,6 +53,8 @@ public class ScanService extends Service {
         super.onDestroy();
 
         stopForeground(true);
+
+        // TODO: release wake lock if it is being held
     }
 
     private void startScan() {
