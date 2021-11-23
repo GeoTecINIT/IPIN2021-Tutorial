@@ -13,7 +13,7 @@
 
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
-    <!-- TODO: add permission to use foreground services -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -44,11 +44,10 @@
             android:name=".alarm.ScanAlarmReceiver"
             android:exported="false" />
 
-        <!-- TODO: set location as service type -->
-        <!-- https://developer.android.com/guide/topics/manifest/service-element#foregroundservicetype -->
         <service android:name=".service.ScanService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="location" />
     </application>
 
 </manifest>
