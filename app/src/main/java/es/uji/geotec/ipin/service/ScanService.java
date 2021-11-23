@@ -26,6 +26,14 @@ public class ScanService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         int flag = super.onStartCommand(intent, flags, startId);
 
+        // TODO: set service in foreground mode with an explaining notification
+        // Steps:
+        //      - Create a new NotificationProvider instance:
+        //          - Provides a notification --> NotificationProvider#getForegroundNotification()
+        //      - Call startForeground(...). Parameters:
+        //          - id: notification id --> NotificationProvider.NOTIFICATION_ID_FOREGROUND
+        //          - notification: the notification from NotificationProvider
+
         startScan();
 
         return flag;
@@ -34,6 +42,10 @@ public class ScanService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        // TODO: remove service from foreground mode and remove notification using stopForeground(...)
+        //
+        // Android DOCS: https://developer.android.com/reference/android/app/Service#stopForeground(int)
     }
 
     private void startScan() {
