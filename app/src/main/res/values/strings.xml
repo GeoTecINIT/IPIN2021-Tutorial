@@ -20,4 +20,7 @@
 
     <string name="alert_ok">OK</string>
     <string name="alert_close">Close</string>
+
+    <string name="foreground_notification_title">BLE scan ongoing</string>
+    <string name="foreground_notification_text">Beacons scan is being performed</string>
 </resources>
