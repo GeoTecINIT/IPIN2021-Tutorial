@@ -9,7 +9,14 @@ is getting the app to run in a systematic (i.e., every minute, with minimum dela
 During this tutorial, we will visit several tasks scheduling approaches, developing
 from the least reliable and simple solution (i.e., the one any newcomer or without experience developer would apply)
  to the most robust and engineered one.
- 
+
+## Tutorial structure
+This tutorial is divided in two parts:
+
+- [Part 1 - Development guidelines](https://docs.google.com/presentation/d/1BSQ-sHQitOVoHVkkGfK2Kew1CgHlpTV8I9EZSesXbss/edit?usp=sharing):
+How to schedule a recurring data collection task in Android and ensure it gets executed when we want to.
+- Part 2 - Hands-on development: Development of an Android app to systematically collect BLE fingerprints for 10 seconds, every minute.
+
 
 ## Repository structure
 
