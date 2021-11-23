@@ -41,6 +41,10 @@
         <receiver
             android:name=".alarm.ScanAlarmReceiver"
             android:exported="false" />
+
+        <service android:name=".service.ScanService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
