@@ -15,7 +15,8 @@ This tutorial is divided in two parts:
 
 - [Part 1 - Development guidelines](https://docs.google.com/presentation/d/1BSQ-sHQitOVoHVkkGfK2Kew1CgHlpTV8I9EZSesXbss/edit?usp=sharing):
 How to schedule a recurring data collection task in Android and ensure it gets executed when we want to.
-- Part 2 - Hands-on development: Development of an Android app to systematically collect BLE fingerprints for 10 seconds, every minute.
+- [Part 2 - Hands-on development](https://docs.google.com/presentation/d/1ex9mD3hWMn2speUfqPWyZ8S4nSGkmFuvJ2RLPrfWnTE/edit?usp=sharing):
+ Development of an Android app to systematically collect BLE fingerprints for 10 seconds, every minute.
 
 
 ## Repository structure
